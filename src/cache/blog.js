@@ -1,5 +1,9 @@
 const {
-    set
+    set,
+    get
 } = require('./_redis')
 
-set()
+//set("today", "511", 100000)
+get("name").then((res) => {
+    console.log(res)
+})

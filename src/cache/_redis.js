@@ -38,7 +38,7 @@ function set(key, val, timeout = 60 * 60) {
  * @param {string} key 
  */
 function get(key) {
-    const prommise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
         redisClient.get(key, (err, val) => {
             if (err) {
                 reject(err)
@@ -57,6 +57,7 @@ function get(key) {
             }
         })
     })
+    return promise
 }
 
 module.exports = {
