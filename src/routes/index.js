@@ -20,7 +20,6 @@ router.get('/json', async (ctx, next) => {
     session.viewNum++
     ctx.body = {
         title: 'koa2 json',
-        num: session.viewNum
     }
 })
 
