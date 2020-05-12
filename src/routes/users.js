@@ -2,22 +2,23 @@ const router = require('koa-router')()
 
 router.prefix('/users')
 
-router.get('/', function (ctx, next) {
+// eslint-disable-next-line no-unused-vars
+router.get('/', (ctx, next) => {
     ctx.body = 'this is a users response!'
 })
-
-router.get('/bar', function (ctx, next) {
+// eslint-disable-next-line no-unused-vars
+router.get('/bar', (ctx, next) => {
     ctx.body = 'this is a users/bar response'
 })
-
-router.post("/login", async (ctx, next) => {
+// eslint-disable-next-line no-unused-vars
+router.post('/login', async (ctx, next) => {
     const {
         username,
-        password
+        password,
     } = ctx.request.body
     ctx.body = {
         name: username,
-        pwd: password
+        pwd: password,
     }
 })
 

@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 const {
-    set,
-    get
+    get,
 } = require('./_redis')
 
-//set("today", "511", 100000)
-get("name").then((res) => {
+// set("today", "511", 100000)
+get('name').then((res) => {
     console.log(res)
 })

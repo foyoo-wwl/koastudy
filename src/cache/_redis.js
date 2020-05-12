@@ -1,25 +1,27 @@
+/* eslint-disable no-console */
+/* eslint-disable no-param-reassign */
 /**
  * @description 链接redis方法
  */
 
 const redis = require('redis')
 const {
-    REDIS_CONF
-} = require('./../conf/db')
+    REDIS_CONF,
+} = require('../conf/db')
 
-//创建客户端
+// 创建客户端
 
 const redisClient = redis.createClient(
-    REDIS_CONF.port, REDIS_CONF.host
+    REDIS_CONF.port, REDIS_CONF.host,
 )
 
-redisClient.on('error', err => {
+redisClient.on('error', (err) => {
     console.log('redis error', err)
 })
 
 
 /**
- * 
+ *
  * @param {string} key key
  * @param {value} val value
  * @param {number} timeout 过期单位
@@ -34,8 +36,8 @@ function set(key, val, timeout = 60 * 60) {
 
 
 /**
- * 
- * @param {string} key 
+ *
+ * @param {string} key
  */
 function get(key) {
     const promise = new Promise((resolve, reject) => {
@@ -50,7 +52,7 @@ function get(key) {
             }
             try {
                 resolve(
-                    JSON.parse(val)
+                    JSON.parse(val),
                 )
             } catch (ex) {
                 resolve(val)
@@ -62,5 +64,5 @@ function get(key) {
 
 module.exports = {
     set,
-    get
+    get,
 }

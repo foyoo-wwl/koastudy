@@ -1,21 +1,26 @@
+/* eslint-disable no-plusplus */
 const router = require('koa-router')()
 
-router.get('/', async (ctx, next) => {
+router.get('/', async (ctx) => {
     await ctx.render('index', {
-        title: 'Hello Koa 2!'
+        title: 'Hello Koa 2!',
     })
 })
 
-router.get('/string', async (ctx, next) => {
+router.get('/string', async (ctx) => {
     ctx.body = 'koa2 string'
 })
 
-router.get('/json', async (ctx, next) => {
-    const session = ctx.session
+router.get('/json', async (ctx) => {
+    const {
+        session,
+    } = ctx
 
     if (session.viewNum == null) {
         session.viewNum = 0
     }
+    throw Error()
+
 
     session.viewNum++
     ctx.body = {
@@ -23,25 +28,25 @@ router.get('/json', async (ctx, next) => {
     }
 })
 
-router.get("/profile/:username", async (ctx, next) => {
+router.get('/profile/:username', async (ctx) => {
     const {
-        username
+        username,
     } = ctx.params
     ctx.body = {
-        tittle: "this is",
-        name: username
+        tittle: 'this is',
+        name: username,
     }
 })
 
-router.get("/profile/:username/:pageIndex", async (ctx, next) => {
+router.get('/profile/:username/:pageIndex', async (ctx) => {
     const {
         username,
-        pageIndex
+        pageIndex,
     } = ctx.params
     ctx.body = {
-        tittle: "this is",
+        tittle: 'this is',
         name: username,
-        page: pageIndex
+        page: pageIndex,
     }
 })
 

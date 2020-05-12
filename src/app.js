@@ -1,4 +1,8 @@
+/* eslint-disable no-const-assign */
+/* eslint-disable spaced-comment */
+/* eslint-disable no-console */
 const Koa = require('koa')
+
 const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
@@ -6,43 +10,54 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-generic-session')
-const redisStore = require("koa-redis")
+const redisStore = require('koa-redis')
+const {
+    isProd
+} = require('./utils/env')
 
 const {
-    REDIS_CONF
+    REDIS_CONF,
 } = require('./conf/db')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const errorViewRouter = require('./routes/view/error')
 
 // error handler
-onerror(app)
+let onerrorConf = {}
+if (isProd) {
+    onerrorConf = {
+        redirect: '/error',
+    }
+}
+
+onerror(app, onerrorConf)
 
 // middlewares
 app.use(bodyparser({
-    enableTypes: ['json', 'form', 'text']
+    enableTypes: ['json', 'form', 'text'],
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(require('koa-static')(`${__dirname}/public`))
 
-app.use(views(__dirname + '/views', {
-    extension: 'ejs'
+app.use(views(`${__dirname}/views`, {
+    extension: 'ejs',
 }))
 
-//session配置
+// session配置
 app.keys = ['Uifajg_fjf278525@!$']
 app.use(session({
-    key: 'wb.sid', //cookie name
-    prefix: 'wb:sess:', //redis key 前缀
+    key: 'wb.sid', // cookie name
+    prefix: 'wb:sess:', // redis key 前缀
     cookie: {
         path: '/',
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000
+        maxAge: 24 * 60 * 60 * 1000,
     },
     store: redisStore({
-        all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
-    })
+        all: `${REDIS_CONF.host}:${REDIS_CONF.port}`,
+    }),
 }))
 
 
@@ -55,12 +70,14 @@ app.use(async (ctx, next) => {
 })
 
 // routes
+
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
     console.error('server error', err, ctx)
-});
+})
 
 module.exports = app
