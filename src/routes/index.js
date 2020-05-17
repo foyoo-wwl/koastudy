@@ -19,7 +19,6 @@ router.get('/json', async (ctx) => {
     if (session.viewNum == null) {
         session.viewNum = 0
     }
-    throw Error()
 
 
     session.viewNum++

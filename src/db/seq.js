@@ -6,14 +6,18 @@
 
 const Sequelize = require('sequelize')
 const {
+    MYSQL_CONF,
+} = require('../conf/db')
+
+const {
     host,
     user,
     database,
     password,
-} = require('../conf/db')
-const {
-    isTest,
-} = require('../utils/env')
+} = MYSQL_CONF
+// const {
+//     isTest,
+// } = require('../utils/env')
 
 const conf = {
     host,
@@ -21,9 +25,9 @@ const conf = {
 }
 
 
-if (isTest) {
-    conf.loging = () => {}
-}
+// if (isTest) {
+//     conf.loging = () => {}
+// }
 
 const seq = new Sequelize(database, user, password, conf)
 

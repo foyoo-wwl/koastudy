@@ -13,7 +13,7 @@ let REDIS_CONF = {
 }
 
 let MYSQL_CONF = {
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
     password: 'zaijian4114',
     port: 3306,
@@ -26,7 +26,7 @@ if (isDev) {
         host: '127.0.0.1',
     }
     MYSQL_CONF = {
-        host: 'localhost',
+        host: '127.0.0.1',
         user: 'root',
         password: 'zaijian4114',
         port: 3306,
