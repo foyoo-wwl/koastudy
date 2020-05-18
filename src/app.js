@@ -21,7 +21,7 @@ const {
 
 const {
     SESSION_SECRET_EKY,
-} = require('../src/conf/secrectKeys')
+} = require('./conf/secrectKeys')
 
 const index = require('./routes/index')
 const userViewRouter = require('./routes/view/user')
