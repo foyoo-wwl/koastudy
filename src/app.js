@@ -19,6 +19,10 @@ const {
     REDIS_CONF,
 } = require('./conf/db')
 
+const {
+    SESSION_SECRET_EKY,
+} = require('../src/conf/secrectKeys')
+
 const index = require('./routes/index')
 const userViewRouter = require('./routes/view/user')
 const errorViewRouter = require('./routes/view/error')
@@ -47,7 +51,7 @@ app.use(views(`${__dirname}/views`, {
 }))
 
 // session配置
-app.keys = ['Uifajg_fjf278525@!$']
+app.keys = [SESSION_SECRET_EKY]
 app.use(session({
     key: 'wb.sid', // cookie name
     prefix: 'wb:sess:', // redis key 前缀
