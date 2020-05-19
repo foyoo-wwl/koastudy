@@ -1,7 +1,11 @@
 /* eslint-disable no-plusplus */
 const router = require('koa-router')()
+const {
+    loginRedirect,
+    loginCheck,
+} = require('../middlewares/loginChecks')
 
-router.get('/', async (ctx) => {
+router.get('/', loginRedirect, async (ctx) => {
     ctx.body = 'Hello Koa 2!'
 })
 
@@ -9,7 +13,7 @@ router.get('/string', async (ctx) => {
     ctx.body = 'koa2 string'
 })
 
-router.get('/json', async (ctx) => {
+router.get('/json', loginCheck, async (ctx) => {
     const {
         session,
     } = ctx
