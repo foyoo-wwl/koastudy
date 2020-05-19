@@ -5,6 +5,7 @@
 const {
     getUserInfo,
     createUser,
+    deleteUser,
 } = require('../service/user')
 const {
     SuccessModel,
@@ -15,6 +16,7 @@ const {
     registerUserNameExistInfo,
     registerFailInfo,
     loginFailInfo,
+    deleteUserFailInfo,
 } = require('../model/ErrorInfo')
 
 const {
@@ -86,8 +88,22 @@ async function login(ctx, userName, password) {
     }
     return new SuccessModel()
 }
+
+/**
+ * 删除用户
+ * @param {string} userName username
+ */
+
+async function deleteCurUser(userName) {
+    const result = await deleteUser(userName)
+    if (result) {
+        return new SuccessModel()
+    }
+    return new ErrorModel(deleteUserFailInfo)
+}
 module.exports = {
     isExist,
     register,
     login,
+    deleteCurUser,
 }

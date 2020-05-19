@@ -7,16 +7,25 @@ const {
     isExist,
     register,
     login,
+    deleteCurUser,
 } = require('../../controller/user')
 const userValidate = require('../../validator/user')
 const {
     genValidator,
 } = require('../../middlewares/validators')
 
+const {
+    isTest,
+} = require('../../utils/env')
+
+const {
+    loginCheck,
+} = require('../../middlewares/loginChecks')
+
 router.prefix('/api/user')
 
 
-// // 注册路由
+// 注册路由
 router.post('/register', genValidator(userValidate), async (ctx) => {
     const {
         userName,
@@ -52,6 +61,18 @@ router.post('/login', async (ctx) => {
         userName,
         password,
     )
+})
+
+// 删除
+router.post('/delete', loginCheck, async (ctx) => {
+    if (isTest) {
+        console.log('testtest')
+        const {
+            userName,
+        } = ctx.session.userInfo
+        // 调用controller
+        ctx.body = await deleteCurUser(userName)
+    }
 })
 
 module.exports = router
