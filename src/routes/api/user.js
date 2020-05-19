@@ -66,7 +66,6 @@ router.post('/login', async (ctx) => {
 // 删除
 router.post('/delete', loginCheck, async (ctx) => {
     if (isTest) {
-        console.log('testtest')
         const {
             userName,
         } = ctx.session.userInfo
