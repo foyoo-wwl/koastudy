@@ -47,7 +47,6 @@ router.post('/login', async (ctx) => {
         userName,
         password,
     } = ctx.request.body
-    console.log(userName, password)
     ctx.body = await login(
         ctx,
         userName,
