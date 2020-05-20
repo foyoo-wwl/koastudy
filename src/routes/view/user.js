@@ -35,7 +35,7 @@ router.get('/register', async (ctx) => {
     })
 })
 
-router.get('/setting', loginRedirect, async (ctx, next) => {
+router.get('/setting', loginRedirect, async (ctx) => {
     await ctx.render('setting', ctx.session.userInfo)
 })
 
