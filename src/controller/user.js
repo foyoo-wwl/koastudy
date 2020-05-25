@@ -20,6 +20,7 @@ const {
     loginFailInfo,
     deleteUserFailInfo,
     changeInfoFailInfo,
+    changePasswordFailInfo,
 } = require('../model/ErrorInfo')
 
 const {
@@ -142,10 +143,39 @@ async function changeInfo(ctx, {
     return new ErrorModel(changeInfoFailInfo)
 }
 
+/**
+ * 修改密码
+ * @param {string} userName 用户名
+ * @param {string} password 密码
+ * @param {string} newPassword 新密码
+ */
+async function changePassword(userName, password, newPassword) {
+    const result = await updateUser({
+        newPassword: doCrypto(newPassword),
+    }, {
+        userName,
+        password: doCrypto(password),
+    })
+    if (result) {
+        return new SuccessModel()
+    }
+    return new ErrorModel(changePasswordFailInfo)
+}
+
+/**
+ * 退出登陆
+ * @param {obj} ctx ctx
+ */
+async function loginOut(ctx) {
+    delete ctx.session.userInfo
+    return new SuccessModel()
+}
 module.exports = {
     isExist,
     register,
     login,
     deleteCurUser,
     changeInfo,
+    changePassword,
+    loginOut,
 }
