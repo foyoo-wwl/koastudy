@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /**
  * @description user controller
  */
@@ -6,6 +7,7 @@ const {
     getUserInfo,
     createUser,
     deleteUser,
+    updateUser,
 } = require('../service/user')
 const {
     SuccessModel,
@@ -17,6 +19,7 @@ const {
     registerFailInfo,
     loginFailInfo,
     deleteUserFailInfo,
+    changeInfoFailInfo,
 } = require('../model/ErrorInfo')
 
 const {
@@ -101,9 +104,48 @@ async function deleteCurUser(userName) {
     }
     return new ErrorModel(deleteUserFailInfo)
 }
+
+
+/**
+ * 修改个人信息
+ * @param {Object} ctx ctx
+ * @param {nickName} string 昵称
+ * @param {city} string 城市
+ * @param {picture} string 头像
+ */
+async function changeInfo(ctx, {
+    nickName,
+    city,
+    picture,
+}) {
+    const {
+        userName,
+    } = ctx.session.userInfo
+    if (!nickName) {
+        nickName = userName
+    }
+    const result = await updateUser({
+        newNickName: nickName,
+        newCity: city,
+        newPicture: picture,
+    }, {
+        userName,
+    })
+    if (result) {
+        Object.assign(ctx.session.userInfo, {
+            nickName,
+            city,
+            picture,
+        })
+        return new SuccessModel()
+    }
+    return new ErrorModel(changeInfoFailInfo)
+}
+
 module.exports = {
     isExist,
     register,
     login,
     deleteCurUser,
+    changeInfo,
 }

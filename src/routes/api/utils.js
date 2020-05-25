@@ -24,7 +24,6 @@ router.post('/upload', loginCheck, koaFrom(), async (ctx) => {
         name,
         type,
     } = file
-
     ctx.body = await saveFile({
         name,
         type,
