@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-26 00:04:31
- * @LastEditTime: 2020-05-26 23:07:22
+ * @LastEditTime: 2020-05-26 23:29:27
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /wb/src/app.js
@@ -38,7 +38,7 @@ const userViewRouter = require('./routes/view/user')
 const errorViewRouter = require('./routes/view/error')
 const userApiRouter = require('./routes/api/user')
 const utilsApiRouter = require('./routes/api/utils')
-
+const blogHomeApiRouter = require('./routes/api/blog-home')
 // error handler
 let onerrorConf = {}
 if (isProd) {
@@ -92,6 +92,7 @@ app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods())
+app.use(blogHomeApiRouter.routes(), blogHomeApiRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 
 

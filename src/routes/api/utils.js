@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-26 00:04:31
- * @LastEditTime: 2020-05-26 23:21:09
+ * @LastEditTime: 2020-05-26 23:24:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /wb/src/routes/api/utils.js
@@ -26,7 +26,6 @@ router.post('/upload', loginCheck, koaFrom(), async (ctx) => {
     const {
         file,
     } = ctx.req.files.file
-    console.log(file)
     if (!file) {
         return
     }
