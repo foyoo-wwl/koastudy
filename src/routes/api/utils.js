@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-05-26 00:04:31
+ * @LastEditTime: 2020-05-26 23:21:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /wb/src/routes/api/utils.js
+ */
 /**
  * @description  utils api 路由
  */
@@ -17,7 +25,11 @@ router.prefix('/api/utils')
 router.post('/upload', loginCheck, koaFrom(), async (ctx) => {
     const {
         file,
-    } = ctx.req.files
+    } = ctx.req.files.file
+    console.log(file)
+    if (!file) {
+        return
+    }
     const {
         size,
         path,

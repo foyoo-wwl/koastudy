@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-05-26 00:04:31
+ * @LastEditTime: 2020-05-26 23:07:22
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /wb/src/app.js
+ */
 /* eslint-disable no-const-assign */
 /* eslint-disable spaced-comment */
 /* eslint-disable no-console */
@@ -25,7 +33,7 @@ const {
     SESSION_SECRET_EKY,
 } = require('./conf/secrectKeys')
 
-const index = require('./routes/index')
+const blogViewRouter = require('./routes/view/blog')
 const userViewRouter = require('./routes/view/user')
 const errorViewRouter = require('./routes/view/error')
 const userApiRouter = require('./routes/api/user')
@@ -80,8 +88,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-
-app.use(index.routes(), index.allowedMethods())
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods())
