@@ -3,7 +3,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-07 20:30:28
- * @LastEditTime: 2020-06-07 21:03:18
+ * @LastEditTime: 2020-06-07 21:11:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /wb/src/routes/api/blog-profile.js
@@ -27,7 +27,6 @@ router.get('/loadMore/:userName/:pageIndex', loginCheck, async (ctx) => {
     } = ctx.params
     pageIndex = parseInt(pageIndex)
     const result = await getProfileBlogList(userName, pageIndex, 5)
-    console.log(result)
     ctx.body = result
 })
 

@@ -2,7 +2,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-26 23:34:04
- * @LastEditTime: 2020-06-07 21:02:49
+ * @LastEditTime: 2020-06-07 21:11:34
  * @LastEditors: Please set LastEditors
  * @Description: 微博service
  * @FilePath: /wb/src/service/blog.js
@@ -28,7 +28,6 @@ async function createBlog({
         userId,
         content,
     })
-    console.log(userId, content)
     return result.dataValues
 }
 
