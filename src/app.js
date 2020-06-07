@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-26 00:04:31
- * @LastEditTime: 2020-06-07 20:33:52
+ * @LastEditTime: 2020-06-07 23:16:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /wb/src/app.js
@@ -33,6 +33,7 @@ const {
     SESSION_SECRET_EKY,
 } = require('./conf/secrectKeys')
 
+const squareApiRouter = require('./routes/api/blog-square')
 const profileApiRoter = require('./routes/api/blog-profile')
 const blogViewRouter = require('./routes/view/blog')
 const userViewRouter = require('./routes/view/user')
@@ -89,6 +90,8 @@ app.use(async (ctx, next) => {
 })
 
 // routes
+
+app.use(squareApiRouter.routes(), squareApiRouter.allowedMethods())
 app.use(profileApiRoter.routes(), profileApiRoter.allowedMethods())
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())

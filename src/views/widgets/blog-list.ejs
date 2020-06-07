@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-09-14 15:57:11
- * @LastEditTime: 2020-06-07 16:17:26
+ * @LastEditTime: 2020-06-07 23:39:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /wb/src/views/widgets/blog-list.ejs
@@ -10,29 +10,9 @@
 <div class="item-wrapper">
     <img class="user-picture" src="<%= blog.user.picture%>" />
     <div class="content clear-fix">
-        <% if (blog.image) { %>
-        <a href="<%= blog.image%>" target="_blank">
-            <img class="blog-img" src="<%= blog.image%>" />
-        </a>
-        <% } %>
-        <a href="/profile/<%= blog.user.userName%>">
-            <%= blog.user.nickName%>
-        </a>:
         <span><%- blog.content%></span>
     </div>
     <div class="info">
-        <!-- <span><%= blog.createdAtFormat%></span> -->
-        &nbsp;
-        <!-- <% if (locals.canReply) { %>
-            <%# 可以回复 %>
-            <a href="#" class="blog-list-reply"
-                data-content="<%= blog.content%>"
-                data-userName="<%= blog.user.userName%>"
-                data-nickName="<%= blog.user.nickName%>"
-            >
-                <i class="fa fa-mail-reply"></i> 回复
-            </a>
-            <% } %> -->
     </div>
 </div>
 <% }) %>
