@@ -2,14 +2,16 @@
 /*
  * @Author: your name
  * @Date: 2020-05-26 23:32:29
- * @LastEditTime: 2020-05-26 23:52:40
+ * @LastEditTime: 2020-06-07 16:11:09
  * @LastEditors: Please set LastEditors
  * @Description: 首页controller
  * @FilePath: /wb/src/controller/blog-home.js
  */
 
 const xss = require('xss')
-const createBlog = require('../service/blog')
+const {
+    createBlog,
+} = require('../service/blog')
 const {
     SuccessModel,
     ErrorModel,
@@ -25,6 +27,7 @@ async function create({
     userId,
     content,
 }) {
+    console.log('userId', userId)
     // service
     try {
         // 创建微博
